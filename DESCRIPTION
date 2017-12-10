@@ -1,9 +1,9 @@
 Package: forvol
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Title: A library of equations for computing tree volumes
+Version: 0.0.1
+Authors@R: person("Bryce", "Frank", email = "bfrank70@gmail.com", role = c("aut", "cre"))
+Description: This package provides functions for interacting with the Forest Inventory and Analysis equations for computing tree volumes.
 Depends: R (>= 3.4.2)
-License: What license is it under?
+License: MIT
 Encoding: UTF-8
 LazyData: true
