@@ -5,7 +5,7 @@
 ### List config files in the csv directory
 
 
-csv_path <- file.path('..', 'csv')
+csv_path <- system.file('csv', package = 'forvol')
 
 FindCSV <- function() {
   # Finds the csv with the input string
@@ -19,6 +19,7 @@ GetCoefs <- function(region_code, species_num) {
 
   # Load into memory
   config <- read.csv(config)
+  print(config)
 
   # Get the coefficient table
   coef_table <- config[which(config$SPECIES_NUM == species_num),]$COEF_TABLE
@@ -27,13 +28,11 @@ GetCoefs <- function(region_code, species_num) {
   coef_tbl_sp <- config[which(config$SPECIES_NUM == species_num),]$COEF_TBL_SP
 
   # Get the coefficients csv
-  #print(file.path(csv_path, paste(coef_table, '.csv', sep='')))
+  print(file.path(csv_path, paste(coef_table, '.csv', sep='')))
   coef_table <- read.csv(file.path(csv_path, paste(coef_table, '.csv', sep='')))
 
 
   return(coef_table)
 }
 
-# Test call:
-a<- GetCoefs('OR_W', 202)
 
