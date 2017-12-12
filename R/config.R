@@ -14,7 +14,9 @@ FindCSV <- function() {
 GetCoefs <- function(region_code, species_num) {
   # Get region config table file path
   config_regex <- paste(region_code, '_', 'config', sep='')
+
   config <- list.files(csv_path, config_regex, ignore.case=TRUE)
+  print(config)
   config <- file.path(csv_path, config)
 
   # Load into memory
@@ -34,5 +36,4 @@ GetCoefs <- function(region_code, species_num) {
 
   return(coef_table)
 }
-
 

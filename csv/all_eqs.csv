@@ -1,0 +1,3 @@
+CF_VOL_EQ, R_STRING
+CU202020,"10^(b[1] + b[2]*log10(dbh)*log10(ht)+ b[3] * log10(dbh)**2 + b[4] * log10(dbh)+ b[5] * log10(ht) + b[6] * log10(ht)**2)"
+CU20221,"test"
