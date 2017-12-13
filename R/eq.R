@@ -19,14 +19,19 @@ BuildEquation <- function(eq_id, coefs_table) {
   ## Get equation string using id from the csv
   eq_csv <- read.csv(file.path(system.file('csv', package = 'forvol'), 'all_eqs.csv'),
                      stringsAsFactors=FALSE)
-  b <- coefs_table
+  beta <- coefs_table
 
   ## Fnd correct equation ID
 
   eq_string <- eq_csv$R_STRING[which(eq_csv$CF_VOL_EQ == eq_id)]
-  func <- eval(parse(text=eq_string))
 
-  return(func)
+  ## Convert string to expression
+  func <- parse(text=eq_string)
+
+  ## Populate expression with coefficients
+  exp <- do.call("substitute", list(func[[1]], beta))
+
+  return(exp)
 
 }
 
