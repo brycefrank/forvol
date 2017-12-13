@@ -1,1 +1,18 @@
-* TODO Instead of using csv's and parsing, save all csv's as .rdas
+A place for todos and logs and such.
+
+*** Todo list
+**** TODO Instead of using csv's and parsing, save all csv's as .rda
+**** TODO Match computed volumes ('krishna.xlsx') to forvol volumes
+***** First for 'W_OR' then for all records
+      file:csv/all_eqs.csv
+      file:R/config.R
+*** Archive
+    
+
+
+  
+
+
+
+
+
