@@ -16,17 +16,17 @@ A place for todos and logs and such.
    :LOGBOOK:
    CLOCK: [2017-12-13 Wed 10:12]--[2017-12-13 Wed 16:03] =>  5:51
    :END:
-*** Working on Tests
+*** Working on Tests                                                  :tests:
     - Converted [[file:'test/cvts_test.xslx'][cvts_test.xlsx]] to a .rds format
       - Not without some trouble, apparently .rds (along with saveRDS and readRDS) is the proper format 
     - Wrote test_cvts function in [[file:test/test.R][test.R]], a test on Douglas-fir was encouraging, but not perfect,
       the average difference was 0.03 cubic feet. My guess is some sort of a rounding error is
       involved on one of the coefficients, but the performance is good enough for now.
-*** Merchantable Equations
+*** Merchantable Equations                                         :merchvol:
     - Time to start working on equations .csv. I want to flesh out Douglas-fir first, just to get
       a feel on how this softwood boardfoot volume equations work.
     - Deciding to put this off for now, I need to think of how to handle the structure
-*** Adding more CVTS equations
+*** Adding more CVTS equations                                         :cvts:
     - Added CU263004 (WH), CU000077(WRC), fairly straightforward
     - Ran into some conceptual issues with CU122011, where there is a diameter break in how
       the equation is calculated at 6 inches dbh. It may be best to have the BuildEquation() function
@@ -38,6 +38,12 @@ A place for todos and logs and such.
       to implement some error handling
     - Added some functions to ease debugging and development (FindCSV and GetEquationString)
     - I then tested WH volumes (passed) and RC (no CVTS data for RC)
+** <2017-12-14 Thu> 
+   :LOGBOOK:
+   CLOCK: [2017-12-14 Thu 08:05]
+   :END:
+   - Generally, today I want to work on testing, documentation, and fixing style
+*** Automated Testing for CVTS
 * Equations Checklist
   - Mark done only if written and tested
 ** Western Oregon
@@ -49,10 +55,10 @@ A place for todos and logs and such.
     - [ ] Lodgepole Pine
     - [ ] Red Alder
     - [ ] etc.
-*** CV4 [2/7] 
-    - [X] 202 - Douglas-fir
+*** CV4 [0/7] 
+    - [ ] 202 - Douglas-fir
     - [ ] 242 - Western Redcedar
-    - [X] 260 - Western Hemlock
+    - [ ] 260 - Western Hemlock
     - [ ] Ponderosa Pine
     - [ ] Lodgepole Pine
     - [ ] Red Alder
@@ -62,6 +68,7 @@ A place for todos and logs and such.
 **** DONE Match computed volumes ('krishna.xlsx') to forvol volumes
      CLOSED: [2017-12-13 Wed 16:11]
       - Part of a larger task to create automated testing script
+        moving to archive
 ***** First for 'W_OR' then for all records
       file:csv/all_eqs.csv
       file:R/config.R
