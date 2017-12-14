@@ -1,12 +1,72 @@
 A place for todos and logs and such.
 
-*** Todo list
-**** TODO Instead of using csv's and parsing, save all csv's as .rda
-**** TODO Match computed volumes ('krishna.xlsx') to forvol volumes
+* General Todo list
+**** TODO Instead of using csv's and parsing, save all csv's as .rds
+**** TODO Investigate volume discrepancies for DF CVTS equations
+**** TODO Create species lookup function, good for debugging
+**** TODO Refactor and decide on consistent variable names
+     - Species Number, Species Code??
+     - Region String, Location String??
+     - etc
+**** TODO Create automated testing script for CVTS
+     - Should go through every species in each configuration csv and check the
+       testing data. Best to limit to Western Oregon due to the 
+* Log
+** <2017-12-13 Wed> 
+   :LOGBOOK:
+   CLOCK: [2017-12-13 Wed 10:12]--[2017-12-13 Wed 16:03] =>  5:51
+   :END:
+*** Working on Tests
+    - Converted [[file:'test/cvts_test.xslx'][cvts_test.xlsx]] to a .rds format
+      - Not without some trouble, apparently .rds (along with saveRDS and readRDS) is the proper format 
+    - Wrote test_cvts function in [[file:test/test.R][test.R]], a test on Douglas-fir was encouraging, but not perfect,
+      the average difference was 0.03 cubic feet. My guess is some sort of a rounding error is
+      involved on one of the coefficients, but the performance is good enough for now.
+*** Merchantable Equations
+    - Time to start working on equations .csv. I want to flesh out Douglas-fir first, just to get
+      a feel on how this softwood boardfoot volume equations work.
+    - Deciding to put this off for now, I need to think of how to handle the structure
+*** Adding more CVTS equations
+    - Added CU263004 (WH), CU000077(WRC), fairly straightforward
+    - Ran into some conceptual issues with CU122011, where there is a diameter break in how
+      the equation is calculated at 6 inches dbh. It may be best to have the BuildEquation() function
+      be defined by location, species **and** diameter. Feeling pretty good about the structure
+      implemented in file:test/cvts_equations.csv (I renamed this file to be more explicit in what
+      it provides, should allow for easier extensibility later on if taper, etc is added)
+*** Expanding file:R/config.R and file:R/eq.R
+    - I need to make sure the change in file name is reflected in these scripts, and I have been wanting
+      to implement some error handling
+    - Added some functions to ease debugging and development (FindCSV and GetEquationString)
+    - I then tested WH volumes (passed) and RC (no CVTS data for RC)
+* Equations Checklist
+  - Mark done only if written and tested
+** Western Oregon
+*** CVTS [2/7] 
+    - [X] 202 - Douglas-fir
+    - [ ] 242 - Western Redcedar
+    - [X] 260 - Western Hemlock
+    - [ ] Ponderosa Pine
+    - [ ] Lodgepole Pine
+    - [ ] Red Alder
+    - [ ] etc.
+*** CV4 [2/7] 
+    - [X] 202 - Douglas-fir
+    - [ ] 242 - Western Redcedar
+    - [X] 260 - Western Hemlock
+    - [ ] Ponderosa Pine
+    - [ ] Lodgepole Pine
+    - [ ] Red Alder
+    - [ ] etc.
+*** SV632 [ ]
+* Archive
+**** DONE Match computed volumes ('krishna.xlsx') to forvol volumes
+     CLOSED: [2017-12-13 Wed 16:11]
+      - Part of a larger task to create automated testing script
 ***** First for 'W_OR' then for all records
       file:csv/all_eqs.csv
       file:R/config.R
-*** Archive
+  
+
     
 
 
