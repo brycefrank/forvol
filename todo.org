@@ -11,6 +11,7 @@ A place for todos and logs and such.
 **** TODO Create automated testing script for CVTS
      - Should go through every species in each configuration csv and check the
        testing data. Best to limit to Western Oregon due to the 
+**** TODO Try to resolve the 'no_visible binding...' errors
 * Log
 ** <2017-12-13 Wed> 
    :LOGBOOK:

@@ -1,4 +1,4 @@
-CF_VOL_EQ, R_STRING
-CU202020,"10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)**2 + B4 * log10(dbh)+ B5 * log10(ht) + B6 * log10(ht)**2)"
-CU263004,"10^(B1 + B2 * log10(dbh) +B3 * log10(ht) + B4 * dbh)"
+CF_VOL_EQ,SP, CVTS
+CU202020,DF,"10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)**2 + B4 * log10(dbh)+ B5 * log10(ht) + B6 * log10(ht)**2)"
+CU263004,WH,"10^(B1 + B2 * log10(dbh) +B3 * log10(ht) + B4 * dbh)"
 

@@ -10,8 +10,13 @@ get_equation_string <- function(region, spcd) {
 
 }
 
+str_eval <- function(x){
+  return(eval(parse(text=x)))
+}
+
 build_equation <- function(eq_id, coefs_table) {
-  ## Using the equation id and given coefficient, builds the volume equation
+  ## Using the equation id and given coefficient,
+  ## attempts to build the volume equation
 
   ## Get equation string using id from the csv
   eq_csv <- read.csv(file.path(system.file("csv", package = "forvol"),
@@ -23,6 +28,7 @@ build_equation <- function(eq_id, coefs_table) {
 
   eq_string <- eq_csv$CVTS_1[which(eq_csv$CF_VOL_EQ == eq_id)]
 
+  ## TODO Handle functions
   ## Convert string to expression without coefficients
   func <- parse(text = eq_string)
 
