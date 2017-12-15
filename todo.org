@@ -41,10 +41,19 @@ A place for todos and logs and such.
     - I then tested WH volumes (passed) and RC (no CVTS data for RC)
 ** <2017-12-14 Thu> 
    :LOGBOOK:
-   CLOCK: [2017-12-14 Thu 08:05]
+   CLOCK: [2017-12-14 Thu 08:05]--[2017-12-13 Thu 17:40]
    :END:
    - Generally, today I want to work on testing, documentation, and fixing style
 *** Automated Testing for CVTS
+    - Got at least partway done with the config test, checks for missing equations
+*** Ponderosa pine equation (i.e. MacLean & Berger)
+    - Wrote into file:bin/pipo.R as just an R function to get started, probably the best
+      course of action is to implement just the > 6 inch piece into the equation csv first
+      and then see how that works
+    - Also, the Western Oregon CVTS volumes do not seem to line up with the coefficients provided
+      by the file:excel/volcfgrs_eqn_coefs.xlsx, but the volumes for California Mixed Conifer do
+      line up...so it may be worthwhile to check the other coefficients and heed the testing
+      results.
 * Equations Checklist
   - Mark done only if written and tested
 ** Western Oregon
@@ -53,6 +62,7 @@ A place for todos and logs and such.
     - [ ] 242 - Western Redcedar
     - [X] 260 - Western Hemlock
     - [ ] Ponderosa Pine
+      - Some progress was made...coefficients seem to be wrong, need to check and translate into .csv format
     - [ ] Lodgepole Pine
     - [ ] Red Alder
     - [ ] etc.
