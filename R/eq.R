@@ -25,15 +25,16 @@ build_equation <- function(eq_id, coefs_table) {
   beta <- coefs_table
 
   ## Find correct equation ID
-
   eq_string <- eq_csv$CVTS_1[which(eq_csv$CF_VOL_EQ == eq_id)]
 
-  ## TODO Handle functions
   ## Convert string to expression without coefficients
   func <- parse(text = eq_string)
 
-  ## Populate expression with coefficients
-  exp <- do.call("substitute", list(func[[1]], beta))
+  ## Populate expression with coefficients, convert back to string
+  func_betas <- deparse(do.call("substitute", list(func[[1]], beta)))
 
-  return(exp)
+  ## Reparse with coefficients
+  func_betas <- eval(parse(text = func_betas))
+
+  return(func_betas)
 }

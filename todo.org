@@ -41,7 +41,7 @@ A place for todos and logs and such.
     - I then tested WH volumes (passed) and RC (no CVTS data for RC)
 ** <2017-12-14 Thu> 
    :LOGBOOK:
-   CLOCK: [2017-12-14 Thu 08:05]--[2017-12-13 Thu 17:40]
+   CLOCK: [2017-12-14 Thu 08:05]--[2017-12-15 Fri 08:11] => 24:06
    :END:
    - Generally, today I want to work on testing, documentation, and fixing style
 *** Automated Testing for CVTS
@@ -54,6 +54,23 @@ A place for todos and logs and such.
       by the file:excel/volcfgrs_eqn_coefs.xlsx, but the volumes for California Mixed Conifer do
       line up...so it may be worthwhile to check the other coefficients and heed the testing
       results.
+** <2017-12-15 Fri>  
+   :LOGBOOK:
+   CLOCK: [2017-12-15 Fri 08:11]
+   :END:
+   - The main goal today is to switch the equations .csv over to functions
+     and develop higher level functions for interacting w/library
+     - calc_vol()
+*** csv functions
+    - Had some trouble parsing the function strings with populated betas,
+      had to convert back into a string and re-parse and evaluate. There
+      are probably cleaner ways to do this, but this at least preserves the
+      readability of the equation strings.
+    - One possibility is to keep just the function "body" instead of the
+      'function' tag...but could just be equally messy...
+    - I like this approach for now, and it would not be hard to convert the
+      function strings into actual functions if that is the route we choose to
+      go
 * Equations Checklist
   - Mark done only if written and tested
 ** Western Oregon
@@ -62,7 +79,6 @@ A place for todos and logs and such.
     - [ ] 242 - Western Redcedar
     - [X] 260 - Western Hemlock
     - [ ] Ponderosa Pine
-      - Some progress was made...coefficients seem to be wrong, need to check and translate into .csv format
     - [ ] Lodgepole Pine
     - [ ] Red Alder
     - [ ] etc.

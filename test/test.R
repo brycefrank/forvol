@@ -1,8 +1,9 @@
 #' Testing scripts to verify the existence, accuracy and functionality
-#' of cubic foot volume (top and stump) equations
+#' of cubic foot volume (top and stump) equations. Because these tests
+#' do not strictly expect equivalence, they are not considered a formal
+#' automated test (for now)
 #'
 library(devtools)
-library(xlsx)
 library(dplyr)
 load_all("../../forvol")
 
@@ -29,13 +30,13 @@ eq <- read.csv(eq)
 #' @examples test_eq(202, 'W_OR', build_equation('CU202020', get_coefs('W_OR', 202)))
 ## TODO Fix the above example, which will require fixing the structure of test
 ## eq anyway...which is bad
-test_eq <- function(spcd, region_string, new_cvts_func) {
-  test_df <- filter(test_data, SPCD == spcd)
+test_eq <- function(spcd, region, new_cvts_func) {
+  test_df <- filter(test_data, SPCD == spcd, config_code == region) %>%
+    select(DO_BH, HT_TOT, CVTS) %>%
+    rename(dbh = DO_BH, ht = HT_TOT) %>%
+    na.omit()
 
-  dbh <- test_df$DO_BH
-  ht <- test_df$HT_TOT
-
-  return(mean(test_df$CVTS - eval(new_cvts_func)))
+  return(mean(test_df$CVTS - new_cvts_func(test_df$dbh, test_df$ht)))
 }
 
 
