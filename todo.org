@@ -2,16 +2,14 @@ A place for todos and logs and such.
 
 * General Todo list
 **** TODO Instead of using csv's and parsing, save all csv's as .rds
-**** TODO Investigate volume discrepancies for DF CVTS equations
 **** TODO Create species lookup function, good for debugging
 **** TODO Refactor and decide on consistent variable names
      - Species Number, Species Code??
      - Region String, Location String??
      - etc
-**** TODO Create automated testing script for CVTS
-     - Should go through every species in each configuration csv and check the
-       testing data. Best to limit to Western Oregon due to the 
 **** TODO Try to resolve the 'no_visible binding...' errors
+**** TODO Create a dataframe of region ID's and descriptions (global)
+**** TODO Create a dataframe of species codes and descriptions (global)
 * Log
 ** <2017-12-13 Wed> 
    :LOGBOOK:
@@ -41,7 +39,7 @@ A place for todos and logs and such.
     - I then tested WH volumes (passed) and RC (no CVTS data for RC)
 ** <2017-12-14 Thu> 
    :LOGBOOK:
-   CLOCK: [2017-12-14 Thu 08:05]--[2017-12-15 Fri 08:11] => 24:06
+   CLOCK: [2017-12-14 Thu 08:05]--[2017-12-14 Thu 17:00]
    :END:
    - Generally, today I want to work on testing, documentation, and fixing style
 *** Automated Testing for CVTS
@@ -56,7 +54,7 @@ A place for todos and logs and such.
       results.
 ** <2017-12-15 Fri>  
    :LOGBOOK:
-   CLOCK: [2017-12-15 Fri 08:11]
+   CLOCK: [2017-12-15 Fri 08:11]--[2017-12-15 Fri 14:00]
    :END:
    - The main goal today is to switch the equations .csv over to functions
      and develop higher level functions for interacting w/library
@@ -74,16 +72,24 @@ A place for todos and logs and such.
 *** Higher level functions
     - Going to start by making a prototype in Jupyter notebooks, should tranlsate
       well into a sample later on
+** <2017-12-16 Sat> 
+*** File Structure
+    - Deleted some directories and moved a few things around
+*** Bug Fix
+    - Was not searching for coefficients by the correct column,
+      fixed (hopefully)
+*** Docstrings
+    - Adding some doc strings to file:R/config.R and file:R/eq.R
 * Equations Checklist
   - Mark done only if written and tested
 ** Western Oregon
-*** CVTS [2/7] 
+*** CVTS [4/7] 
     - [X] 202 - Douglas-fir
     - [ ] 242 - Western Redcedar
     - [X] 260 - Western Hemlock
-    - [ ] Ponderosa Pine
+    - [X] 122 -Ponderosa Pine
     - [ ] Lodgepole Pine
-    - [ ] Red Alder
+    - [X] Red Alder
     - [ ] etc.
 *** CV4 [0/7] 
     - [ ] 202 - Douglas-fir
@@ -113,3 +119,10 @@ A place for todos and logs and such.
 
 
 
+**** DONE Create automated testing script for CVTS
+     CLOSED: [2017-12-16 Sat 09:29]
+     - Should go through every species in each configuration csv and check the
+       testing data. Best to limit to Western Oregon due to the 
+     - Moved to archive, not done but underway
+**** DONE Investigate volume discrepancies for DF CVTS equations
+     CLOSED: [2017-12-16 Sat 09:30]

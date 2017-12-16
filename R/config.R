@@ -1,21 +1,24 @@
-### Configuration lookup
-### Input a region code, find the csv...for now
-
-
-### List config files in the csv directory
-
-
 csv_path <- system.file("csv", package = "forvol")
 
+#' Finds the csv with the input search term
+#' Mostly for use as a debugging tool
+#'
+#' @param regexp Regex search term as string
+#' @return The absolute path to the csv file
 find_CSV <- function(regexp) {
-  # Finds the csv with the input string regexp and returns the absolute path
   csv <- list.files(csv_path, regexp, ignore.case = TRUE)
 
   return(file.path(csv_path, csv))
 }
 
-get_coefs <- function(region_code, species_num) {
-  # Get region config table file path
+#' Gets the coefficient table for a species in a specific region.:w
+#'
+#' @param region_code The region code string to retrieve from, for instance
+#' 'OR_W' is western Oregon.
+#' @param spcd The FIA species code
+#' @return A 1 row coefficient table containing the values of the coefficients
+#' for the specified region and species.
+get_coefs <- function(region_code, spcd) {
   config_regex <- paste(region_code, "_", "config", sep = "")
   config <- list.files(csv_path, config_regex, ignore.case = TRUE)
 
@@ -30,12 +33,13 @@ get_coefs <- function(region_code, species_num) {
   config <- read.csv(config)
 
   # Catch missing species code for the given region
-  if (!(species_num %in% config$SPECIES_NUM)) {
-    stop(sprintf("Species code '%s' not found for this region.", species_num))
+  if (!(spcd %in% config$SPCD)) {
+    stop(sprintf("Species code coefficients format '%s'
+                  not found for this region.", spcd))
   }
 
   # Get the coefficient table
-  coef_table <- config[which(config$SPECIES_NUM == species_num), ]$COEF_TABLE
+  coef_table <- config[which(config$COEF_TBL_S == spcd), ]$COEF_TABLE
   # Get the coefficients csv
   coef_table <- read.csv(file.path(csv_path, paste(coef_table,
                                                    ".csv", sep = "")))
@@ -48,7 +52,7 @@ get_coefs <- function(region_code, species_num) {
     return(coef_table)
   }
   else {
-    coef_table <- coef_table[which(coef_table$Species == species_num), ]
+    coef_table <- coef_table[which(coef_table$Species == spcd), ]
     return(coef_table)
   }
 }
