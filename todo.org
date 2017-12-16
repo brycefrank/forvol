@@ -71,6 +71,9 @@ A place for todos and logs and such.
     - I like this approach for now, and it would not be hard to convert the
       function strings into actual functions if that is the route we choose to
       go
+*** Higher level functions
+    - Going to start by making a prototype in Jupyter notebooks, should tranlsate
+      well into a sample later on
 * Equations Checklist
   - Mark done only if written and tested
 ** Western Oregon

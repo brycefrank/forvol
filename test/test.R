@@ -36,7 +36,15 @@ test_eq <- function(spcd, region, new_cvts_func) {
     rename(dbh = DO_BH, ht = HT_TOT) %>%
     na.omit()
 
-  return(mean(test_df$CVTS - new_cvts_func(test_df$dbh, test_df$ht)))
+  if(nrow(test_df) == 0){
+    return("No testing data available.")
+  }
+  
+  
+  new_vols <- mapply(new_cvts_func, test_df$dbh, test_df$ht)
+
+  ## I need to apply the function instead of calling it on the columns
+  return(mean(test_df$CVTS - new_vols))
 }
 
 
@@ -59,7 +67,6 @@ test_config <- function (config_path) {
   ## Find unique equations that are missing
   missing <- config$CF_VOL_EQ[!(config$CF_VOL_EQ %in% eq$CF_VOL_EQ)]
   missing <- unique(missing)
-
 
   ##TODO Implement testing equation string performance
   
