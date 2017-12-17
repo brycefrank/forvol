@@ -42,9 +42,9 @@ A place for todos and logs and such.
    CLOCK: [2017-12-14 Thu 08:05]--[2017-12-14 Thu 17:00]
    :END:
    - Generally, today I want to work on testing, documentation, and fixing style
-*** Automated Testing for CVTS
+*** Automated Testing for CVTS                                        :tests:
     - Got at least partway done with the config test, checks for missing equations
-*** Ponderosa pine equation (i.e. MacLean & Berger)
+*** Ponderosa pine equation (i.e. MacLean & Berger)                    :cvts:
     - Wrote into file:bin/pipo.R as just an R function to get started, probably the best
       course of action is to implement just the > 6 inch piece into the equation csv first
       and then see how that works
@@ -69,7 +69,7 @@ A place for todos and logs and such.
     - I like this approach for now, and it would not be hard to convert the
       function strings into actual functions if that is the route we choose to
       go
-*** Higher level functions
+*** Higher level functions                                    :documentation:
     - Going to start by making a prototype in Jupyter notebooks, should tranlsate
       well into a sample later on
 ** <2017-12-16 Sat> 
@@ -78,17 +78,30 @@ A place for todos and logs and such.
 *** Bug Fix
     - Was not searching for coefficients by the correct column,
       fixed (hopefully)
-*** Docstrings
+*** Docstrings                                                :documentation:
     - Adding some doc strings to file:R/config.R and file:R/eq.R
+    - Tested docstring generation w/Roxygen2, seemed straightforward
+*** Test Visualization                                                :tests:
+    - It would be nice for users to see what equations have been completed,
+      along with their performance. One idea is to create an n by n raster
+      plot (using ggplot perhaps) for each volume type where the X axis represents
+      the region ('OR_W', 'OR_E'...etc) and the Y axis represents the species.
+      The raster cell would then indicate in some way the performance of the equation,
+      whether or not it exists, was tested, etc etc. This would make a nice to-do list
+      for me and be translucent for the user reading documentation.
+** <2017-12-17 Sun> 
+   - A lot of other stuff to do today, so we'll see what gets done, best bet is to
+     finish the visualization idea from yesterday
 * Equations Checklist
   - Mark done only if written and tested
+*** Could be automated fully  
 ** Western Oregon
 *** CVTS [4/7] 
     - [X] 202 - Douglas-fir
     - [ ] 242 - Western Redcedar
     - [X] 260 - Western Hemlock
     - [X] 122 -Ponderosa Pine
-    - [ ] Lodgepole Pine
+    - [X] Lodgepole Pine
     - [X] Red Alder
     - [ ] etc.
 *** CV4 [0/7] 
@@ -108,17 +121,6 @@ A place for todos and logs and such.
 ***** First for 'W_OR' then for all records
       file:csv/all_eqs.csv
       file:R/config.R
-  
-
-    
-
-
-  
-
-
-
-
-
 **** DONE Create automated testing script for CVTS
      CLOSED: [2017-12-16 Sat 09:29]
      - Should go through every species in each configuration csv and check the

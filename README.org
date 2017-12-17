@@ -6,7 +6,7 @@ under the United States Forest Service. The main objective of this project is to
 provide a free and open source high level package in R for interacting with and testing the performance
 of taper, biomass and volume equations, while functioning as a suitable equation
 library to be used by other programs (such as forest inventory compilers and
-merchandizers).
+merchandisers).
 
 ** Standard Notation
 
@@ -14,3 +14,4 @@ To function properly, forvol requires that some standardized notation be met:
 
 - Diameter at breast height - dbh
 - Total height of the tree - ht
+  
