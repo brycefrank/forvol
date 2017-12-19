@@ -92,6 +92,8 @@ A place for todos and logs and such.
 ** <2017-12-17 Sun> 
    - A lot of other stuff to do today, so we'll see what gets done, best bet is to
      finish the visualization idea from yesterday
+** <2017-12-18 Mon> 
+*** 
 * Equations Checklist
   - Mark done only if written and tested
 *** Could be automated fully  

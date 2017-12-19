@@ -117,13 +117,22 @@ test_config_sp <- function() {
   }
 
   library(tidyr)
-  library(ggplot2)
 
   # Filter out rows that have no occurrences in any of the regions
   # This is true where not all cells are nas
   some_spcd <- apply(vis_frame[2:ncol(vis_frame)], 1, function(x) any(!is.na((x))))
-  vis_frame <- vis_frame[some_spcd, ]
+  vis_frame[some_spcd, ]
 
+}
+
+#' Creates the visualization for completed equations
+#'
+#'
+#' 
+test_config_plot <- function() {
+  library(ggplot2)
+
+  vis_frame <- test_config_sp()
   rast_frame <- gather(vis_frame, key = "Region", value = "Failing", 2:22)
 
   ggplot(data = rast_frame, aes(x = Region, y = spcd))+
