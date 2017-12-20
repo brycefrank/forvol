@@ -8,7 +8,7 @@
 common_lookup <- function(spcd, latin = FALSE) {
   csv_path <- system.file("csv", package = "forvol")
 
-  spcd_data <- read.csv('../csv/ref_species_reduced.csv')
+  spcd_data <- read.csv(file.path(csv_path, "ref_species_reduced.csv"))
 
   spcd_data$COMMON_NAME[which(spcd_data$SPCD == spcd)]
 }

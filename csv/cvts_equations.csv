@@ -1,9 +1,15 @@
-CF_VOL_EQ, MIN_DBH, MAX_DBH, MIN_HT, MAX_HT, CVTS_1, CVTS_2
-CU202020,1,-1,-1,-1,"function(dbh,ht){10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)^2 + B4 * log10(dbh)+ B5 * log10(ht) + B6 * log10(ht)**2)}"
-CU263004,1,-1,-1,-1,"function(dbh,ht){10^(B1 + B2 * log10(dbh) + B3 * log10(ht) + B4 * dbh)}"
-CU000077,1,-1,-1,-1,"function(dbh,ht){10^(B1 + B2 * log10(dbh) + B3 * log10(ht))}" 
-CU122011,1, 6,-1,-1,"", ""
-CU122011,6,-1,-1,-1,"function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4};  cv4 <- cf4 * ba * ht;  tarif <- (cv4 * 0.912733) / (ba - 0.087266);  if (tarif <= 0) {tarif <- 0.01};  cvts <- (cv4 * term) / (ba - 0.087266);  return(cvts)}","",
-CU351004,1,-1,-1,-1,"function(dbh,ht){if(ht < 18) {ht <- 18}; z <- (ht + B25 - dbh / B26) / (ht - 4.5); z25 <- z^2.5; f <- B6 * z25 + B7 * z25 * dbh/1000 + B8 * z25 * ht/1000 + B9 * z25 * ht * dbh/100000 + B10 * z25 * ht**2/1000000 + B11 * z25 * ht**0.5/1000 + B12 * z**4 * dbh/1000 + B13 * z**4 * ht/1000 + B14 * z**33 * ht * dbh/1000000 + B15 * z**33 * ht**0.5/10000 + B16 * z**41 * ht**2/10000000; cvt <- B1 * dbh**2 * (ht - 4.5) * f; cvts <- cvt / (B17 + B18 * B19**(dbh + B20)); return(cvts)}",""
-CU122011,1,-1,-1,-1,"function(dbh,ht){10^B1 * dbh**B2 * ht ** B3}"
+CF_VOL_EQ,CVTS_1
+CU202020,"function(dbh,ht){10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)^2 + B4 * log10(dbh)+ B5 * log10(ht) + B6 * log10(ht)**2)}"
+CU263004,"function(dbh,ht){10^(B1 + B2 * log10(dbh) + B3 * log10(ht) + B4 * dbh)}"
+CU000077,"function(dbh,ht){10^(B1 + B2 * log10(dbh) + B3 * log10(ht))}" 
+CU122011,"function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht;  tarif <- (cv4 * 0.912733) / (ba - 0.087266);  if (tarif <= 0) {tarif <- 0.01};  cvts <- (cv4 * term) / (ba - 0.087266);  return(cvts)}"
+CU351004,"function(dbh,ht){if(ht < 18) {ht <- 18}; z <- (ht + B25 - dbh / B26) / (ht - 4.5); z25 <- z^2.5; f <- B6 * z25 + B7 * z25 * dbh/1000 + B8 * z25 * ht/1000 + B9 * z25 * ht * dbh/100000 + B10 * z25 * ht**2/1000000 + B11 * z25 * ht**0.5/1000 + B12 * z**4 * dbh/1000 + B13 * z**4 * ht/1000 + B14 * z**33 * ht * dbh/1000000 + B15 * z**33 * ht**0.5/10000 + B16 * z**41 * ht**2/10000000; cvt <- B1 * dbh**2 * (ht - 4.5) * f; cvts <- cvt / (B17 + B18 * B19**(dbh + B20)); return(cvts)}"
+CU122011,"function(dbh,ht){10^B1 * dbh**B2 * ht ** B3}"
+CU015005,"function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht;  tarif <- (cv4 * 0.912733) / (ba - 0.087266);  if (tarif <= 0) {tarif <- 0.01};  cvts <- (cv4 * term) / (ba - 0.087266);  return(cvts)}"
+CU020001,"function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht;  tarif <- (cv4 * 0.912733) / (ba - 0.087266);  if (tarif <= 0) {tarif <- 0.01};  cvts <- (cv4 * term) / (ba - 0.087266);  return(cvts)}"
+CU081001,"function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht;  tarif <- (cv4 * 0.912733) / (ba - 0.087266);  if (tarif <= 0) {tarif <- 0.01};  cvts <- (cv4 * term) / (ba - 0.087266);  return(cvts)}"
+CU000087,"function(dbh,ht){10^B1 * dbh**B2 * ht ** B3}"
+CU119005,"function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht;  tarif <- (cv4 * 0.912733) / (ba - 0.087266);  if (tarif <= 0) {tarif <- 0.01};  cvts <- (cv4 * term) / (ba - 0.087266);  return(cvts)}"
+CU108003,"function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht;  tarif <- (cv4 * 0.912733) / (ba - 0.087266);  if (tarif <= 0) {tarif <- 0.01};  cvts <- (cv4 * term) / (ba - 0.087266);  return(cvts)}"
+
 

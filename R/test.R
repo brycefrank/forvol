@@ -6,6 +6,7 @@
 #' equation performance.
 #'
 library(dplyr)
+library(tidyr)
 
 # Adjust some column names for consistency
 test_data <- readRDS(system.file("data/cvts_test.rds", package = "forvol"))
@@ -16,7 +17,7 @@ eq <- read.csv(eq)
 
 
 #' Tests a specific CVTS function against the FIA dataset
-#' ("cvts_test.rds") this is meant to be an internal function
+#' (test_data) this is meant to be an internal function
 #'
 #' \code{test_eq} returns the average difference between
 #' the new calculated volumes and the testing dataset.
@@ -85,12 +86,24 @@ test_all_configs <- function() {
   return(unique(all_config_errors))
 }
 
-
 #' Configuration test for species instead of equations,
 #' serves as a function to construct the equations completion
 #' status figure in the readme TODO
 #'
-test_config_sp <- function() {
+test_config_sp <- function(region) {
+  test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
+  eqs <- mapply(build_equation2, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
+
+  # Boolean, true if not returning a function
+  eqs <- 'character' == sapply(eqs, typeof)
+
+  join_frame <- data.frame(spcd = test_config$SPECIES_NUM)
+  join_frame[sprintf('%s', region)] <- eqs
+
+  return(join_frame)
+}
+
+test_config_all_sp <- function() {
   # Get region list
 
   regions <- read.csv(find_CSV('regions'))
@@ -102,7 +115,6 @@ test_config_sp <- function() {
 
   for (region in regions[[1]]) {
     #print(region)
-    print(find_CSV(sprintf("^%s_config", region)))
     test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
 
     # Attempt to build CVTS equation for all species
@@ -122,14 +134,11 @@ test_config_sp <- function() {
   # This is true where not all cells are nas
   some_spcd <- apply(vis_frame[2:ncol(vis_frame)], 1, function(x) any(!is.na((x))))
   vis_frame[some_spcd, ]
-
 }
 
 #' Creates the visualization for completed equations
-#'
-#'
 #' 
-test_config_plot <- function() {
+test_config_plot_all <- function() {
   library(ggplot2)
 
   vis_frame <- test_config_sp()
@@ -140,18 +149,20 @@ test_config_plot <- function() {
     coord_fixed(ratio = 2)
 }
 
-#nrow(test_all_configs())
-#a <- test_config('/home/bryce/Programming/forvol/csv/OR_E_config.csv')
-#b <-test_config('/home/bryce/Programming/forvol/csv/OR_W_config.csv')
+#' A convenient way to quickly list the failing species
+#' for a given region
+failing <- function(region) {
+  test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
+  eqs <- mapply(build_equation2, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
 
-#sum(a$CF_VOL_EQ %in% b$CF_VOL_EQ)
+  # Boolean, true if not returning a function
+  eqs <- 'character' == sapply(eqs, typeof)
 
-## Example test:
-##df_cvts <- BuildEquation('CU202020', GetCoefs('OR_W', 202))
+  join_frame <- data.frame(spcd = test_config$SPECIES_NUM)
+  join_frame[sprintf('%s', region)] <- eqs
 
-##test_cvts(202, 'Western Oregon', df_cvts)
+  join_frame <- gather(join_frame, key = "Region", value = "Failing", 2) %>%
+    filter(Failing == TRUE)
 
-##wh_cvts <- BuildEquation('CU000077', GetCoefs('OR_W', 242))
-##test_cvts(242, 'Western Oregon', wh_cvts)
-
-##filter(test_data, SPCD == 242)
+  return(join_frame)
+}

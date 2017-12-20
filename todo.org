@@ -2,14 +2,18 @@ A place for todos and logs and such.
 
 * General Todo list
 **** TODO Instead of using csv's and parsing, save all csv's as .rds
-**** TODO Create species lookup function, good for debugging
-**** TODO Refactor and decide on consistent variable names
-     - Species Number, Species Code??
-     - Region String, Location String??
-     - etc
+     - Wait for formal tests before attempting
 **** TODO Try to resolve the 'no_visible binding...' errors
 **** TODO Create a dataframe of region ID's and descriptions (global)
-**** TODO Create a dataframe of species codes and descriptions (global)
+* Before Release Do These
+** TODO Formal tests for [0/4] 
+   1. [ ] find_CSV()
+   2. [ ] build_equation()
+   3. [ ] calc_vol()
+   4. [ ] common_lookup()
+      - Refactor to lookup_common()
+** TODO Flesh out error catching
+** TODO Flesh out the jupyter example
 * Log
 ** <2017-12-13 Wed> 
    :LOGBOOK:
@@ -93,7 +97,11 @@ A place for todos and logs and such.
    - A lot of other stuff to do today, so we'll see what gets done, best bet is to
      finish the visualization idea from yesterday
 ** <2017-12-18 Mon> 
-*** 
+   - Added spcd lookup function script
+** <2017-12-20 Wed> 
+   - Cleaned some code. Things are finally taking a solid form w/r/t CVTS, I think once I (start and) finish
+     writing formal tests I can make things public and start a dev branch on github. A lot of species are
+     represented between Oregon, Washington and California for CVTS.
 * Equations Checklist
   - Mark done only if written and tested
 *** Could be automated fully  
@@ -116,6 +124,8 @@ A place for todos and logs and such.
     - [ ] etc.
 *** SV632 [ ]
 * Archive
+**** DONE Create species lookup function, good for debugging
+     CLOSED: [2017-12-19 Tue 12:03]
 **** DONE Match computed volumes ('krishna.xlsx') to forvol volumes
      CLOSED: [2017-12-13 Wed 16:11]
       - Part of a larger task to create automated testing script
@@ -130,3 +140,10 @@ A place for todos and logs and such.
      - Moved to archive, not done but underway
 **** DONE Investigate volume discrepancies for DF CVTS equations
      CLOSED: [2017-12-16 Sat 09:30]
+**** DONE Create a dataframe of species codes and descriptions (global)
+     CLOSED: [2017-12-19 Tue 12:02]
+**** DONE Refactor and decide on consistent variable names
+     CLOSED: [2017-12-19 Tue 12:02]
+     - Species Number, Species Code??
+     - Region String, Location String??
+     - etc
