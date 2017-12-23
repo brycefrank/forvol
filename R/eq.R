@@ -31,7 +31,7 @@ build_equation <- function(region, spcd) {
   # TODO Handle empty equation 'cells'
 
   # Get the equation string from the configuration file
-  eq_id <- get_equation_string(region, spcd)
+  eq_id <- get_equation_id(region, spcd)
 
   # Get equation string using id from the csv
   eq_csv <- read.csv(file.path(system.file("csv", package = "forvol"),
@@ -61,7 +61,7 @@ build_equation <- function(region, spcd) {
   return(func_betas)
 }
 
-#' Gets the coefficient table for a species in a specific region.:w
+#' Gets the coefficient table for a species in a specific region.
 #'
 #' @param region The region code string to retrieve from, for instance
 #' 'OR_W' is western Oregon.

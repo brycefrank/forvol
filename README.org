@@ -8,10 +8,12 @@ of taper, biomass and volume equations, while functioning as a suitable equation
 library to be used by other programs (such as forest inventory compilers and
 merchandisers).
 
-** Standard Notation
+** Current Status
+   
+   forvol currently only supports select CVTS equations, mostly for species in the Pacific
+   Northwest (for a complete list, see [Supported Equations - CVTS](https://github.com/brycefrank/forvol/wiki/Supported-Equations---CVTS))
+   with plans to expand to merchantable volume, taper, and biomass equations.
 
-To function properly, forvol requires that some standardized notation be met:
-
-- Diameter at breast height - dbh
-- Total height of the tree - ht
-  
+   If there is an equation or feature you would like to see implemented, please submit an
+   [issue](https://github.com/brycefrank/forvol/issues) to this repository, or email me at bryce.frank@oregonstate.edu
+   

@@ -15,7 +15,6 @@ test_data <- mutate(test_data, CVTS = VOLTSGRS)
 eq <- file.path(csv_path, "cvts_equations.csv")
 eq <- read.csv(eq)
 
-
 #' Tests a specific CVTS function against the FIA dataset
 #' (test_data) this is meant to be an internal function
 #'
@@ -92,7 +91,7 @@ test_all_configs <- function() {
 #'
 test_config_sp <- function(region) {
   test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
-  eqs <- mapply(build_equation2, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
+  eqs <- mapply(build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
 
   # Boolean, true if not returning a function
   eqs <- 'character' == sapply(eqs, typeof)
@@ -103,7 +102,7 @@ test_config_sp <- function(region) {
   return(join_frame)
 }
 
-test_config_all_sp <- function() {
+test_config_all_sp <- function(gather_frame = TRUE) {
   # Get region list
 
   regions <- read.csv(find_CSV('regions'))
@@ -118,7 +117,7 @@ test_config_all_sp <- function() {
     test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
 
     # Attempt to build CVTS equation for all species
-    eqs <- mapply(build_equation2, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
+    eqs <- mapply(build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
 
     # Boolean, true if not returning a function
     eqs <- 'character' == sapply(eqs, typeof)
@@ -128,6 +127,11 @@ test_config_all_sp <- function() {
     vis_frame <- merge(vis_frame, join_frame, all.x = TRUE)
   }
 
+  if (gather_frame == FALSE) {
+    return(vis_frame)
+  }
+
+  # TODO fix this load
   library(tidyr)
 
   # Filter out rows that have no occurrences in any of the regions
@@ -153,13 +157,13 @@ test_config_plot_all <- function() {
 #' for a given region
 failing <- function(region) {
   test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
-  eqs <- mapply(build_equation2, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
+  eqs <- mapply(build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
 
   # Boolean, true if not returning a function
-  eqs <- 'character' == sapply(eqs, typeof)
+  eqs <- "character" == sapply(eqs, typeof)
 
   join_frame <- data.frame(spcd = test_config$SPECIES_NUM)
-  join_frame[sprintf('%s', region)] <- eqs
+  join_frame[sprintf("%s", region)] <- eqs
 
   join_frame <- gather(join_frame, key = "Region", value = "Failing", 2) %>%
     filter(Failing == TRUE)
