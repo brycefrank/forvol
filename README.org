@@ -15,5 +15,16 @@ merchandisers).
    with plans to expand to merchantable volume, taper, and biomass equations.
 
    If there is an equation or feature you would like to see implemented, please submit an
-   [[https://github.com/brycefrank/forvol/issues][issue]] to this repository, or email me at bryce.frank@oregonstate.edu
+   [[https://github.com/brycefrank/forvol/issues][issue]] to this repository or send an email (address listed below). 
    
+   
+** Collaboration
+   
+   Be it submission of issues (above) or help in development, testing, and documentation,
+   there are many opportunities for collaboration. This project is in its early phase,
+   so the opportunity is ripe to guide the structure of forvol to make it a succesful
+   equation resource. Please send an email if you are interested in collaborating.
+
+** Contact
+
+   bryce.frank@oregonstate.edu
