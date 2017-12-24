@@ -154,13 +154,7 @@ calc_cvts <- function(dbh, ht, region, spcd) {
     new_tree <- rbind(new_tree ,group)
   }
 
-
-
   return(new_tree)
-
-  # Group the original data
-  #groups <- group_by(uniques) %>%
-  #  rowwise()
 
 }
 
