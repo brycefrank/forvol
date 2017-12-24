@@ -29,6 +29,7 @@ eq <- read.csv(eq)
 #' @examples test_eq(202, 'W_OR', build_equation('CU202020', get_coefs('W_OR', 202)))
 ## TODO Fix the above example, which will require fixing the structure of test
 ## eq anyway...which is bad
+#' @export
 test_eq <- function(region, spcd, new_cvts_func) {
   # Create a testing data frame for the specified region, spcd and function
   test_df <- filter(test_data, SPCD == spcd, config_code == region) %>%
@@ -53,6 +54,7 @@ test_eq <- function(region, spcd, new_cvts_func) {
 #'   ex: 'W_OR'
 #' @return A dataframe of 'results', either not yet implemented equations or the performance
 #' as calculated by \code{test_eq}
+#' @export
 test_config <- function(config_id) {
   ## Read in configuration csv as dataframe
   config_path <- find_CSV(config_id)
@@ -71,6 +73,7 @@ test_config <- function(config_id) {
   return(error_frame)
 }
 
+#' @export
 test_all_configs <- function() {
   ## Master dataframe
   all_config_errors <- data.frame()
@@ -89,6 +92,7 @@ test_all_configs <- function() {
 #' serves as a function to construct the equations completion
 #' status figure in the readme TODO
 #'
+#' @export
 test_config_sp <- function(region) {
   test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
   eqs <- mapply(build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
@@ -102,6 +106,7 @@ test_config_sp <- function(region) {
   return(join_frame)
 }
 
+#' @export
 test_config_all_sp <- function(gather_frame = TRUE) {
   # Get region list
 
@@ -142,6 +147,7 @@ test_config_all_sp <- function(gather_frame = TRUE) {
 
 #' Creates the visualization for completed equations
 #' 
+#' @export
 test_config_plot_all <- function() {
   library(ggplot2)
 

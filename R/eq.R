@@ -1,5 +1,7 @@
 # The main script to hold functions for building equations
 
+library(dplyr)
+
 #' Gets the equation string for a specified region
 #' and species code. This is read directly from the 'cvts_equations.csv'
 #'
@@ -27,6 +29,7 @@ get_equation_id <- function(region, spcd) {
 #' @return An R function that computes CVTS for the input
 #' region and species code. If the code cannot be built,
 #' returns "EE"
+#' @export
 build_equation <- function(region, spcd) {
   # TODO Handle empty equation 'cells'
 
@@ -39,12 +42,14 @@ build_equation <- function(region, spcd) {
                      stringsAsFactors = FALSE)
   beta <- get_coefs(region, spcd)
 
+  ifelse(is.na(beta), return(NA), 1)
+
   # Check if equation id is in the equations data
   if (!(eq_id %in% eq_csv$CF_VOL_EQ)) {
     # TODO There are probably more robust/formal methods of error handling.
     #print("The equation string '%s' could not be found in cvts_equations.csv's
     #        either an error occurred or the equation is not yet implemented")
-    return("EE")
+    return(NA)
   }
 
   eq_string <- eq_csv$CVTS_1[which(eq_csv$CF_VOL_EQ == eq_id)]
@@ -68,6 +73,7 @@ build_equation <- function(region, spcd) {
 #' @param spcd The FIA species code
 #' @return A 1 row coefficient table containing the values of the coefficients
 #' for the specified region and species.
+#' @export
 get_coefs <- function(region, spcd) {
   config <- find_CSV(sprintf("^%s_config", region))
 
@@ -80,10 +86,7 @@ get_coefs <- function(region, spcd) {
   config <- read.csv(config)
 
   # Catch missing species code for the given region
-  if (!(spcd %in% config$SPECIES_NUM)) {
-    stop(sprintf("Species code coefficients for '%s'
-                  not found for this region.", spcd))
-  }
+  ifelse(!(spcd %in% config$SPECIES_NUM), return(NA), 1)
 
   # Get the coefficient table and reset the species
   coef_table <- config$COEF_TABLE[which(config$SPECIES_NUM == spcd)]
@@ -108,23 +111,68 @@ get_coefs <- function(region, spcd) {
 
 #' Serves as the default volume calculation function,
 #' retrieves the coefficient table for the specified species,
-#' region and volume type
+#' region and volume type, generates the function, and applies
+#' it to the input data.
 #'
 #' @param dbh A column of diameter at breast height values (or a single value)
 #' @param ht A column of height values (or a single value)
 #' @param spcd FIA species code
 #' @param region Geographic region
+#' @export
 calc_cvts <- function(dbh, ht, region, spcd) {
-  # Get the coefficient table
-  coef <- get_coefs(region, spcd)
+  # Build all of the equations needed from the input spcd
+  # and region (should work for multiple regions)
 
-  # Get the equation string
-  eq_string <- get_equation_string(region, spcd)
 
-  # Build the volume equation
-  eq <- build_equation(eq_string, coef)
+  # Get unique region and scd combinations
+  uniques <- unique(data.frame(region, spcd))
 
-  # Apply the function to dbh and ht and return
-  mapply(eq, dbh, ht)
+  # Build the equations
+  uniques$eqs <- mapply(build_equation, uniques$region, uniques$spcd)
+
+  # Split the data into spcd - region groups
+  tree_data <- data.frame(dbh, ht, region, spcd)
+  tree_split <- split(tree_data, list(tree_data$region, tree_data$spcd))
+
+  new_tree <- data.frame()
+  for (group in tree_split) {
+    # Get the 'group key'
+    region <- group$region[1]
+    spcd <- group$spcd[1]
+
+    # Get the equation from eqs
+    eq <- uniques$eqs[which((uniques$spcd == spcd & uniques$region == region))]
+    eq <- eq[[1]]
+    # Apply the equation to each record in the group
+    #print(typeof(eq))
+    if(typeof(eq) == "closure") {
+      group$cvts <- mapply(eq, group$dbh, group$ht)
+    } else {
+      group$cvts <- NA
+    }
+
+    new_tree <- rbind(new_tree ,group)
+  }
+
+
+
+  return(new_tree)
+
+  # Group the original data
+  #groups <- group_by(uniques) %>%
+  #  rowwise()
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

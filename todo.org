@@ -5,24 +5,24 @@ A place for todos and logs and such.
      - Wait for formal tests before attempting
 **** TODO Try to resolve the 'no_visible binding...' errors
 **** TODO Create a dataframe of region ID's and descriptions (global)
-**** TODO Automated Equation Availability Checklist (R -> GitHub Wiki)
-     - Very excited about this!
 * Before Release Do These
   - The overall goal here is to create a workable version of forvol
     and then branch to dev and push updates from dev to master for
     major revisions and updates only
-** TODO Formal tests for [1/4] 
-   1. [ ] find_CSV()
-   2. [X] build_equation()
-   3. [ ] calc_vol()
-   4. [ ] common_lookup()
-      - Refactor to lookup_common()
-** TODO Flesh out error catching
-** TODO Flesh out the jupyter example
-** TODO calc_vol() should get some more attention 
+** TODO calc_cvts() should get some more attention 
    - Should produce CVTS for a dummy data set and be flexible enough
      to provide 'Not Yet Implemented' errors if the equations are unavailable
+   - Started working on this in forvol_dev
+** TODO Flesh out error catching
+** TODO Flesh out the jupyter example
+** TODO Formal tests for [2/4] 
+   1. [X] find_CSV()
+   2. [X] build_equation()
+   3. [ ] calc_cvts()
+   4. [ ] common_lookup()
+      - Refactor to lookup_common()
 ** TODO Make this todo.org a local file (or host on server)
+** TODO Try to install the package
 * Log
 ** <2017-12-13 Wed> 
    :LOGBOOK:
@@ -156,3 +156,6 @@ A place for todos and logs and such.
      - Species Number, Species Code??
      - Region String, Location String??
      - etc
+**** DONE Automated Equation Availability Checklist (R -> GitHub Wiki)
+     CLOSED: [2017-12-23 Sat 09:40]
+     - This is at least functional for CVTS equations now.
