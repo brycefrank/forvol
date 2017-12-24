@@ -1,7 +1,7 @@
 # Internal functions used for 'helping'
 
 #' @export
-csv_path <- system.file("csv", package = "forvol")
+csv_path <- "csv"
 
 #' Finds the csv with the input search term
 #' Mostly for use as a debugging tool and internal function
