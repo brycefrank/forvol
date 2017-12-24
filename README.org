@@ -8,6 +8,9 @@ of taper, biomass and volume equations, while functioning as a suitable equation
 library to be used by other programs (such as forest inventory compilers and
 merchandisers).
 
+forvol is in a **pre-release** development stage, with only base functionality
+and a few volume equations. Please use at your own discretion.
+
 ** Current Status
    
    forvol currently only supports select CVTS equations, mostly for species in the Pacific
@@ -16,7 +19,6 @@ merchandisers).
 
    If there is an equation or feature you would like to see implemented, please submit an
    [[https://github.com/brycefrank/forvol/issues][issue]] to this repository or send an email (address listed below). 
-   
    
 ** Collaboration
    

@@ -9,6 +9,7 @@ library(dplyr)
 #' @param region The geographic region of interest.
 #' @param spcd The FIA species code.
 #' @return Returns the equation (as a string)
+#' @export
 get_equation_id <- function(region, spcd) {
   ## TODO check for multiple returns for FindCSV and species within config
 
@@ -123,10 +124,6 @@ get_coefs <- function(region, spcd) {
 #' @param region Geographic region
 #' @export
 calc_cvts <- function(dbh, ht, region, spcd) {
-  # Build all of the equations needed from the input spcd
-  # and region (should work for multiple regions)
-
-
   # Get unique region and scd combinations
   uniques <- unique(data.frame(region, spcd))
 
@@ -158,18 +155,5 @@ calc_cvts <- function(dbh, ht, region, spcd) {
   }
 
   return(new_tree)
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
