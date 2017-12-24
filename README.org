@@ -1,6 +1,6 @@
 * forvol
 
-forvol is a package that contains various equations used to calculate the volume 
+forvol is a package that contains various methods used to calculate the volume 
 of trees using equations implemented by the Forest Inventory and Analysis program 
 under the United States Forest Service. The main objective of this project is to
 provide a free and open source high level package in R for interacting with and testing the performance
@@ -10,6 +10,15 @@ merchandisers).
 
 forvol is in a **pre-release** development stage, with only base functionality
 and a few volume equations. Please use at your own discretion.
+
+** Installation
+
+Although we are not currently on CRAN, using devtools, forvol can be installed thusly
+
+```
+library(devtools)
+install_git("https://github.com/brycefrank/forvol.git")
+```
 
 ** Current Status
    
@@ -30,3 +39,4 @@ and a few volume equations. Please use at your own discretion.
 ** Contact
 
    bryce.frank@oregonstate.edu
+
