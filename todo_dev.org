@@ -1,0 +1,4 @@
+** A Random To-Do List
+*** TODO Fix "AK_SECN" coefficient tables
+    - Tricky / improper formatting
+*** TODO Convert all csv's to rda

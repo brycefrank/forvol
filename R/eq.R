@@ -31,8 +31,6 @@ get_equation_id <- function(region, spcd) {
 #' returns "EE"
 #' @export
 build_equation <- function(region, spcd) {
-  # TODO Handle empty equation 'cells'
-
   # Get the equation string from the configuration file
   eq_id <- get_equation_id(region, spcd)
 
@@ -97,6 +95,11 @@ get_coefs <- function(region, spcd) {
                                                    ".csv", sep = "")))
   # Remove NAs
   coef_table <- coef_table[complete.cases(coef_table), ]
+
+  # Check for erroneous coefficient table TODO fix AK_SECN tables
+  if (!(names(coef_table)[1] == "Species")) {
+    return(NA)
+  }
 
   # If first value of coef_table is "all" return that row,
   # Otherwise return the row of the input species
