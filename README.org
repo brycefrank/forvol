@@ -15,10 +15,10 @@ and a few volume equations. Please use at your own discretion.
 
 Although we are not currently on CRAN, using devtools, forvol can be installed thusly
 
-```
+#+begin_src
 library(devtools)
 install_git("https://github.com/brycefrank/forvol.git")
-```
+#+end_src
 
 ** Current Status
    
