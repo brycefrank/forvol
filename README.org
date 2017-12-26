@@ -20,8 +20,6 @@ library(devtools)
 install_git("https://github.com/brycefrank/forvol.git")
 #+end_src
 
-
-
 ** Current Status
    
    forvol currently only supports select CVTS equations, mostly for species in the Pacific
@@ -42,3 +40,4 @@ install_git("https://github.com/brycefrank/forvol.git")
 
    bryce.frank@oregonstate.edu
 
+   
