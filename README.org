@@ -20,6 +20,10 @@ library(devtools)
 install_git("https://github.com/brycefrank/forvol.git")
 #+end_src
 
+** Sample
+
+For a sample of forvol's functionality, please see [[https://github.com/brycefrank/forvol/blob/master/sample/forvol%20sample.ipynb][this page]].
+
 ** Current Status
    
    forvol currently only supports select CVTS equations, mostly for species in the Pacific
