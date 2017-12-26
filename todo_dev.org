@@ -1,4 +1,18 @@
 ** A Random To-Do List
-*** TODO Fix "AK_SECN" coefficient tables
-    - Tricky / improper formatting
-*** TODO Convert all csv's to rda
+*** Maintenance & Improvements
+**** TODO [#C] Fix "AK_SECN" coefficient tables
+     - Tricky / improper formatting
+**** TODO [#B] Working equations lists needs formatting 
+     - It would be nice if [[https://github.com/brycefrank/forvol/wiki/Supported-Equations:-CVTS][this list]] was more of a table type thing
+     - This would require editing bin/supported.R
+**** TODO [#B] Convert all csv's to rda
+**** TODO [#A] Improve Jupyter sample
+*** New Features
+**** TODO [#B] Implement softwood merchantable volume equations
+***** TODO [#B] Implement cv4 equations
+**** TODO Create forvol-specific citations csv
+** Archive 
+   
+** Changelog 
+*** <2017-12-25 Mon> 
+    - Added lookup_citation function (in R/helper.R). Still needs error catching

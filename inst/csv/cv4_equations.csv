@@ -1,0 +1,10 @@
+CF_VOL_EQ, CV4
+"CU122011","function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht; return(cv4)}"
+"CU015005","function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht; return(cv4)}"
+"CU020001","function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht; return(cv4)}"
+"CU081001","function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht; return(cv4)}"
+"CU119005","function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht; return(cv4)}"
+"CU108003","function(dbh,ht){ba <- dbh^2 * B1; cf4 <- B2 + B3 * (1 / dbh); if(cf4 > 0.4){cf4 <- 0.4}; term <- ((1.033 * (1.0 + 1.382937 * exp(-4.015292 * (dbh/10.0)))) * (ba + 0.087266) - 0.174533 ); cv4 <- cf4 * ba * ht; return(cv4)}"
+"CU202020","function(dbh,ht){ba <- B14 * dbh^2; cvts <- 10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)^2 + B4 * log10(dbh)+ B5 * log10(ht) + B6 * log10(ht)**2); tarif <- (cvts * B7) / ((1.033 * (1 + B9 * exp(B10 * (dbh / 10)))) * (ba + B12) + B13); cv4 <- (tarif * (ba + B12)) / B7; return(cv4)}"
+"CU263004","function(dbh,ht){ba <- B12 * dbh^2; cvts <- 10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)^2 + B4 * dbh); tarif <- (cvts * B5) / ((B6 * (1 + B7 * exp(B8 * (dbh / 10)))) * (ba + B10) + B11); cv4 <- (tarif * (ba + B10)) / B5; return(cv4)}"
+
