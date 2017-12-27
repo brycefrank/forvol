@@ -26,7 +26,6 @@ eq <- read.csv(eq)
 #' @param new_cvts_func The new CVTS equation to test as an R expression
 #' @return The average difference (float) mean(test_cvts - new_cvts)
 #'
-#' @examples test_eq(202, 'W_OR', build_equation('CU202020', get_coefs('W_OR', 202)))
 ## TODO Fix the above example, which will require fixing the structure of test
 ## eq anyway...which is bad
 #' @export
