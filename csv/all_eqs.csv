@@ -1,8 +1,0 @@
-CF_VOL_EQ, DBH_BREAK, CVTS_1, CVTS_2
-CU202020, 5, "10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)^2 + B4 * log10(dbh)+ B5 * log10(ht) + B6 * log10(ht)**2)"
-CU263004, 5, "10^(B1 + B2 * log10(dbh) + B3 * log10(ht) - B4 * dbh)"
-CU000077, 5, "10^(B1 + B2 * log10(dbh) + B3 * log10(ht)" 
-CU122011, 6, "", ""
-
-
-
