@@ -3,13 +3,13 @@ Title: A library of equations for computing tree volumes
 Version: 0.0.1
 Authors@R: person("Bryce", "Frank", email = "bfrank70@gmail.com", role = c("aut", "cre"))
 Description: This package provides functions for interacting with the Forest Inventory and Analysis equations for computing tree volumes.
-Depends: R (>= 3.4.2)
+Depends:
+  R (>= 3.4.2),
+  dplyr,
+  tidyr,
+  ggplot2
 License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: testthat
-Imports:
-  dplyr,
-  tidyr,
-  ggplot2
