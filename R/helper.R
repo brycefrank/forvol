@@ -11,9 +11,9 @@ csv_path <- system.file("csv", package = "forvol")
 #' @export
 find_CSV <- function(regexp) {
   # Add start of string control operator for regexp?
-  csv <- list.files(csv_path, regexp, ignore.case = TRUE)
+  csv <- list.files(forvol::csv_path, regexp, ignore.case = TRUE)
 
-  return(file.path(csv_path, csv))
+  return(file.path(forvol::csv_path, csv))
 }
 
 lookup_citation <- function(equation_id) {
@@ -23,12 +23,12 @@ lookup_citation <- function(equation_id) {
   # least a good start on that path
 
   # Find all equation configurations
-  csv_list <- find_CSV('_eq.csv')
+  csv_list <- forvol::find_CSV('_eq.csv')
 
   csv_combined <- data.frame()
  
   for (csv in csv_list) {
-    csv_rd <- read.csv(csv)
+    csv_rd <- utils::read.csv(csv)
     csv_rd <- csv_rd[c(1, 3)]
     csv_combined <- rbind(csv_combined, csv_rd)
   }

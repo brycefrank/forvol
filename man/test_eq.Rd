@@ -21,6 +21,3 @@ The average difference (float) mean(test_cvts - new_cvts)
 \code{test_eq} returns the average difference between
 the new calculated volumes and the testing dataset.
 }
-\examples{
-test_eq(202, 'W_OR', build_equation('CU202020', get_coefs('W_OR', 202)))
-}
