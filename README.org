@@ -1,3 +1,5 @@
+![Travis-CI Master](https://travis-ci.org/brycefrank/forvol.svg?branch=master)
+
 * forvol
 
 forvol is a package that contains various methods used to calculate the volume 
