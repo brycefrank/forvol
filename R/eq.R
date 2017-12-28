@@ -1,7 +1,5 @@
 # The main script to hold functions for building equations
 
-library(dplyr)
-
 #' Gets the equation string for a specified region
 #' and species code. This is read directly from the 'cvts_equations.csv'
 #'
@@ -12,10 +10,7 @@ library(dplyr)
 #' @export
 get_equation_id <- function(region, spcd) {
   ## TODO check for multiple returns for FindCSV and species within config
-
-  config_search <- find_CSV(sprintf("^%s_config", region))
-
-  config <- read.csv(find_CSV(sprintf("^%s_config", region)))
+  config <- utils::read.csv(forvol::find_CSV(sprintf("^%s_config", region)))
 
   ## Find the equation string for the given species
   eq_str <- config$CF_VOL_EQ[which(config$SPECIES_NUM == spcd)]
@@ -33,13 +28,13 @@ get_equation_id <- function(region, spcd) {
 #' @export
 build_equation <- function(region, spcd) {
   # Get the equation string from the configuration file
-  eq_id <- get_equation_id(region, spcd)
+  eq_id <- forvol::get_equation_id(region, spcd)
 
   # Get equation string using id from the csv
-  eq_csv <- read.csv(file.path(system.file("csv", package = "forvol"),
+  eq_csv <- utils::read.csv(file.path(system.file("csv", package = "forvol"),
                      "cvts_equations.csv"),
                      stringsAsFactors = FALSE)
-  beta <- get_coefs(region, spcd)
+  beta <- forvol::get_coefs(region, spcd)
 
   ifelse(is.na(beta), return(NA), 1)
 
@@ -74,7 +69,7 @@ build_equation <- function(region, spcd) {
 #' for the specified region and species.
 #' @export
 get_coefs <- function(region, spcd) {
-  config <- find_CSV(sprintf("^%s_config", region))
+  config <- forvol::find_CSV(sprintf("^%s_config", region))
 
   # Catch missing region code
   if (identical(config, character(0))) {
@@ -82,7 +77,7 @@ get_coefs <- function(region, spcd) {
   }
 
   # Load into memory
-  config <- read.csv(config)
+  config <- utils::read.csv(config)
 
   # Catch missing species code for the given region
   ifelse(!(spcd %in% config$SPECIES_NUM), return(NA), 1)
@@ -92,10 +87,10 @@ get_coefs <- function(region, spcd) {
   coef_spcd <- config$COEF_TBL_SP[which(config$SPECIES_NUM == spcd)]
 
   # Get the coefficients csv
-  coef_table <- read.csv(file.path(csv_path, paste(coef_table,
+  coef_table <- utils::read.csv(file.path(csv_path, paste(coef_table,
                                                    ".csv", sep = "")))
   # Remove NAs
-  coef_table <- coef_table[complete.cases(coef_table), ]
+  coef_table <- coef_table[stats::complete.cases(coef_table), ]
 
   # Check for erroneous coefficient table TODO fix AK_SECN tables
   if (!(names(coef_table)[1] == "Species")) {

@@ -1,19 +1,17 @@
-#' Testing scripts to verify the existence, accuracy and functionality
-#' of cubic foot volume (top and stump) equations. Because these tests
-#' do not strictly expect equivalence, they are not considered a formal
-#' automated test (for now). This is mostly used for debugging and
-#' development purposes, with some opportunity for testing volume
-#' equation performance.
-#'
-library(dplyr)
-library(tidyr)
+# Testing scripts to verify the existence, accuracy and functionality
+# of cubic foot volume (top and stump) equations. Because these tests
+# do not strictly expect equivalence, they are not considered a formal
+# automated test (for now). This is mostly used for debugging and
+# development purposes, with some opportunity for testing volume
+# equation performance.
+#
 
 # Adjust some column names for consistency
 test_data <- readRDS(system.file("data/cvts_test.rds", package = "forvol"))
-test_data <- mutate(test_data, CVTS = VOLTSGRS)
+test_data <- dplyr::mutate(test_data, CVTS = VOLTSGRS)
 
 eq <- file.path(csv_path, "cvts_equations.csv")
-eq <- read.csv(eq)
+eq <- utils::read.csv(eq)
 
 #' Tests a specific CVTS function against the FIA dataset
 #' (test_data) this is meant to be an internal function
@@ -31,10 +29,12 @@ eq <- read.csv(eq)
 #' @export
 test_eq <- function(region, spcd, new_cvts_func) {
   # Create a testing data frame for the specified region, spcd and function
-  test_df <- filter(test_data, SPCD == spcd, config_code == region) %>%
-    select(DO_BH, HT_TOT, CVTS) %>%
-    rename(dbh = DO_BH, ht = HT_TOT) %>%
-    na.omit()
+  # TODO Convert this chunk to base R, or at least reduce the tidyr clutter a bit
+  test_df <- tidyr::filter(test_data, test_data$SPCD == spcd,
+                           test_data$config_code == region)
+  test_df <- tidyr::select(test_df$DO_BH, test_df$HT_TOT, test_df$CVTS)
+  test_df <- tidyr::rename(dbh = test_df$DO_BH, ht = test_df$HT_TOT)
+  test_df <- tidyr::na.omit(test_df)
 
   # If the data frame is empty, raise an error.
   if (nrow(test_df) == 0){
@@ -56,14 +56,12 @@ test_eq <- function(region, spcd, new_cvts_func) {
 #' @export
 test_config <- function(config_id) {
   ## Read in configuration csv as dataframe
-  config_path <- find_CSV(config_id)
-  config <- read.csv(config_path)
+  config_path <- forvol::find_CSV(config_id)
+  config <- utils::read.csv(config_path)
 
   ## Find unique equations that are missing
   missing <- config$CF_VOL_EQ[!(config$CF_VOL_EQ %in% eq$CF_VOL_EQ)]
   missing <- unique(missing)
-
-  ##TODO Implement testing equation string performance
 
   ## Create dataframe
   error_frame <- data.frame(CF_VOL_EQ = missing,
@@ -78,10 +76,10 @@ test_all_configs <- function() {
   all_config_errors <- data.frame()
 
   ## Get all config paths
-  configs <- list.files(csv_path, pattern = "config", full.names = TRUE)
+  configs <- list.files(forvol::csv_path, pattern = "config", full.names = TRUE)
 
   for (config_id in configs) {
-    all_config_errors <- rbind(all_config_errors, test_config(config_id))
+    all_config_errors <- rbind(all_config_errors, forvol::test_config(config_id))
   }
 
   return(unique(all_config_errors))
@@ -93,8 +91,8 @@ test_all_configs <- function() {
 #'
 #' @export
 test_config_sp <- function(region) {
-  test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
-  eqs <- mapply(build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
+  test_config <- utils::read.csv(forvol::find_CSV(sprintf("^%s_config", region)))
+  eqs <- mapply(forvol::build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
 
   # Boolean, true if not returning a function
   eqs <- 'character' == sapply(eqs, typeof)
@@ -109,19 +107,19 @@ test_config_sp <- function(region) {
 test_config_all_sp <- function(gather_frame = TRUE) {
   # Get region list
 
-  regions <- read.csv(find_CSV('regions'))
+  regions <- utils::read.csv(forvol::find_CSV('regions'))
 
   # TODO replace list from 1 to 999 with actual SPCD codes
-  spcd_unique <- as.character(read.csv(find_CSV("ref_species_red"))$SPCD)
+  spcd_unique <- as.character(utils::read.csv(forvol::find_CSV("ref_species_red"))$SPCD)
   vis_frame <- data.frame(spcd = spcd_unique)
 
 
   for (region in regions[[1]]) {
     #print(region)
-    test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
+    test_config <- utils::read.csv(forvol::find_CSV(sprintf("^%s_config", region)))
 
     # Attempt to build CVTS equation for all species
-    eqs <- mapply(build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
+    eqs <- mapply(forvol::build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
 
     # Boolean, true if not returning a function
     eqs <- 'character' == sapply(eqs, typeof)
@@ -135,9 +133,6 @@ test_config_all_sp <- function(gather_frame = TRUE) {
     return(vis_frame)
   }
 
-  # TODO fix this load
-  library(tidyr)
-
   # Filter out rows that have no occurrences in any of the regions
   # This is true where not all cells are nas
   some_spcd <- apply(vis_frame[2:ncol(vis_frame)], 1, function(x) any(!is.na((x))))
@@ -145,24 +140,23 @@ test_config_all_sp <- function(gather_frame = TRUE) {
 }
 
 #' Creates the visualization for completed equations
-#' 
+#'
 #' @export
 test_config_plot_all <- function() {
-  library(ggplot2)
+  vis_frame <- forvol::test_config_sp()
+  rast_frame <- tidyr::gather(vis_frame, key = "Region", value = "Failing", 2:22)
 
-  vis_frame <- test_config_sp()
-  rast_frame <- gather(vis_frame, key = "Region", value = "Failing", 2:22)
-
-  ggplot(data = rast_frame, aes(x = Region, y = spcd))+
-    geom_tile(aes(fill = Failing)) +
-    coord_fixed(ratio = 2)
+  ggplot2::ggplot(data = rast_frame, ggplot2::aes(x = rast_frame$Region, y = rast_frame$spcd)) +
+    ggplot2::geom_tile(ggplot2::aes(fill = rast_frame$Failing)) +
+    ggplot2::coord_fixed(ratio = 2)
 }
+
 
 #' A convenient way to quickly list the failing species
 #' for a given region
 failing <- function(region) {
-  test_config <- read.csv(find_CSV(sprintf("^%s_config", region)))
-  eqs <- mapply(build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
+  test_config <- utils::read.csv(forvol::find_CSV(sprintf("^%s_config", region)))
+  eqs <- mapply(forvol::build_equation, rep(region, nrow(test_config)), test_config$SPECIES_NUM)
 
   # Boolean, true if not returning a function
   eqs <- "character" == sapply(eqs, typeof)
@@ -170,8 +164,8 @@ failing <- function(region) {
   join_frame <- data.frame(spcd = test_config$SPECIES_NUM)
   join_frame[sprintf("%s", region)] <- eqs
 
-  join_frame <- gather(join_frame, key = "Region", value = "Failing", 2) %>%
-    filter(Failing == TRUE)
+  join_frame <- tidyr::gather(join_frame, key = "Region", value = "Failing", 2)
+  join_frame <- tidyr::filter(join_frame, join_frame$Failing == TRUE)
 
   return(join_frame)
 }
