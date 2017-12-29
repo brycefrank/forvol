@@ -15,13 +15,14 @@ calc_cvts <- function(dbh, ht, region, spcd) {
   uniques <- unique(data.frame(region, spcd))
 
   # Build the equations
-  uniques$eqs <- mapply(build_equation, uniques$region, uniques$spcd)
+  uniques$eqs <- mapply(forvol::build_equation, uniques$region, uniques$spcd)
 
   # Split the data into spcd - region groups
   tree_data <- data.frame(dbh, ht, region, spcd)
   tree_split <- split(tree_data, list(tree_data$region, tree_data$spcd))
 
   new_tree <- data.frame()
+
   for (group in tree_split) {
     # Get the 'group key'
     region <- group$region[1]
@@ -30,8 +31,8 @@ calc_cvts <- function(dbh, ht, region, spcd) {
     # Get the equation from eqs
     eq <- uniques$eqs[which((uniques$spcd == spcd & uniques$region == region))]
     eq <- eq[[1]]
+
     # Apply the equation to each record in the group
-    #print(typeof(eq))
     if(typeof(eq) == "closure") {
       group$cvts <- mapply(eq, group$dbh, group$ht)
     } else {
@@ -43,4 +44,3 @@ calc_cvts <- function(dbh, ht, region, spcd) {
 
   return(new_tree)
 }
-

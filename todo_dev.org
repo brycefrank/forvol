@@ -1,3 +1,11 @@
+** Next Master Update Checklist
+*** TODO Implement some cv4, tarif, and sv632 equations (DF, WH, RC at least)
+**** TODO Test these (informally / formally)
+*** TODO Write test for generalized build_equations function
+*** TODO Re-do sample with new changes
+*** TODO Change calc_cvts to calc_vol OR refactor calc_cvts to work with build_eq
+    
+ - After these are done it will be ok to push to master
 ** A Random To-Do List
 *** Maintenance & Improvements
 **** TODO [#C] Fix "AK_SECN" coefficient tables
@@ -6,13 +14,24 @@
      - It would be nice if [[https://github.com/brycefrank/forvol/wiki/Supported-Equations:-CVTS][this list]] was more of a table type thing
      - This would require editing bin/supported.R
 **** TODO [#B] Convert all csv's to rda
-**** TODO [#A] Improve Jupyter sample
+**** DONE [#A] Improve Jupyter sample
+     CLOSED: [2017-12-27 Wed 19:49]
+**** TODO [#A] More tests!
 *** New Features
 **** TODO [#B] Implement softwood merchantable volume equations
 ***** TODO [#B] Implement cv4 equations
+***** <2017-12-28 Thu> 
+      - This will need either really long function definitions, or the ability
+        to call other functions from the stored function string. The second
+        option seems do-able and would clean the csv's up quite a bit.
+        
+        The problem is that I need to access the original input region and spcd
+        to fully identify the equation in the first place... (i.e. to get the
+        correct coefficients).
+        
+        Got something working (on laptop forvol_dev/pupulate_with_funcs.R). It
+        looks like I am able to build equations within function strings pretty
+        easily. The next step is to figure out what is appropriate w/r/t notation
+        and keeping functions readable.
 **** TODO Create forvol-specific citations csv
 ** Archive 
-   
-** Changelog 
-*** <2017-12-25 Mon> 
-    - Added lookup_citation function (in R/helper.R). Still needs error catching
