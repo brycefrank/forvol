@@ -24,6 +24,11 @@
      - This would require editing bin/supported.R
 **** TODO [#B] Convert all csv's to rda
 **** TODO [#A] More tests!
+***** TODO Calc_vol alignment check
+      - Check that when calc_vol is called on a dataframe, that the vector
+        returned by calc_vol is correctly aligned with the original sample data
+      - This could be done by for-looping through the dataframe and calculating
+        the volume via each record, then comparing equal to 
 *** New Features
 **** TODO [#B] Implement sofarchivetwood merchantable volume equations
 ***** TODO [#B] Implement cv4 equations

@@ -40,8 +40,10 @@ calc_vol <- function(dbh, ht, spcd, region, vol_type) {
     }
 
     # TODO: probably get rid of this
-    new_tree <- rbind(new_tree, group)
+    new_tree <- rbind(new_tree, group[vol_type])
   }
 
-  return(group[vol_type])
+  # Order based off of original index
+  new_tree$index <- as.numeric(row.names(new_tree))
+  return(new_tree[order(new_tree$index), ][vol_type])
 }
