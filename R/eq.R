@@ -24,40 +24,36 @@ get_equation_id <- function(region, spcd) {
 #' @param spcd FIA species code
 #' @return An R function that computes CVTS for the input
 #' region and species code. If the code cannot be built,
-#' returns "EE"
 #' @export
-build_equation <- function(region, spcd) {
-  # Get the equation string from the configuration file
+build_equation <- function(region, spcd, vol_type) {
   eq_id <- forvol::get_equation_id(region, spcd)
 
-  # Get equation string using id from the csv
   eq_csv <- utils::read.csv(file.path(system.file("csv", package = "forvol"),
-                     "cvts_equations.csv"),
-                     stringsAsFactors = FALSE)
-  beta <- forvol::get_coefs(region, spcd)
+                                      sprintf("%s_equations.csv", vol_type)),
+                                      stringsAsFactors = FALSE)
 
-  ifelse(is.na(beta), return(NA), 1)
+  betas <- forvol::get_coefs(region, spcd)
+
+  ifelse(is.na(betas), return(NA), 1)
 
   # Check if equation id is in the equations data
   if (!(eq_id %in% eq_csv$CF_VOL_EQ)) {
-    # TODO There are probably more robust/formal methods of error handling.
-    #print("The equation string '%s' could not be found in cvts_equations.csv's
-    #        either an error occurred or the equation is not yet implemented")
     return(NA)
   }
 
-  eq_string <- eq_csv$CVTS_1[which(eq_csv$CF_VOL_EQ == eq_id)]
+  eq_string <- eq_csv$EQ_STRING[which(eq_csv$CF_VOL_EQ == eq_id)]
 
   # Convert string to expression without coefficients
   func <- parse(text = eq_string)
 
   # Populate expression with coefficients, convert back to string
-  func_betas <- deparse(do.call("substitute", list(func[[1]], beta)))
+  func_betas <- deparse(do.call("substitute", list(func[[1]], betas)))
 
   # Reparse with coefficients
   func_betas <- eval(parse(text = func_betas))
 
   return(func_betas)
+
 }
 
 #' Gets the coefficient table for a species in a specific region.

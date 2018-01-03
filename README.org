@@ -27,9 +27,8 @@ For a sample of forvol's functionality, please see [[https://github.com/brycefra
 
 ** Current Status
    
-   forvol currently only supports select CVTS equations, mostly for species in the Pacific
-   Northwest (for a complete list, see [[https://github.com/brycefrank/forvol/wiki/Supported-Equations:-CVTS][Supported Equations - CVTS]])
-   with plans to expand to merchantable volume, taper, and biomass equations.
+   forvol currently only supports select CVTS, CV4, tarif, and SV632 equations, mostly for species in the Pacific
+   Northwest with plans to continue expanding to merchantable volume, taper, and biomass equations.
 
    If there is an equation or feature you would like to see implemented, please submit an
    [[https://github.com/brycefrank/forvol/issues][issue]] to this repository or send an email (address listed below). 

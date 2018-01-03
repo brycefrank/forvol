@@ -1,3 +1,21 @@
+** Next Master Update Checklist
+*** DONE Implement some cv4, tarif, and sv632 equations (DF, WH, RC at least)
+    CLOSED: [2018-01-01 Mon 10:23]
+    - [X] DF
+    - [X] WH
+    - [X] RC
+*** DONE Write test for generalized build_equations function
+    CLOSED: [2018-01-03 Wed 09:25]
+*** DONE Write informal tests for merchantable volume, tarif, cv4, etc
+    CLOSED: [2018-01-03 Wed 09:25]
+*** DONE Re-do sample with new changes
+    CLOSED: [2018-01-03 Wed 11:04]
+*** TODO Update README with new changes
+*** DONE Change calc_cvts to calc_vol OR refactor calc_cvts to work with build_eq
+    CLOSED: [2018-01-01 Mon 10:48]
+    
+ - After these are done it will be ok to push to master
+*** TODO Create some test data using NVEL
 ** A Random To-Do List
 *** Maintenance & Improvements
 **** TODO [#C] Fix "AK_SECN" coefficient tables
@@ -6,13 +24,39 @@
      - It would be nice if [[https://github.com/brycefrank/forvol/wiki/Supported-Equations:-CVTS][this list]] was more of a table type thing
      - This would require editing bin/supported.R
 **** TODO [#B] Convert all csv's to rda
-**** TODO [#A] Improve Jupyter sample
+**** TODO [#A] More tests!
+***** TODO Calc_vol alignment check
+      - Check that when calc_vol is called on a dataframe, that the vector
+        returned by calc_vol is correctly aligned with the original sample data
+      - This could be done by for-looping through the dataframe and calculating
+        the volume via each record, then comparing equal to 
 *** New Features
-**** TODO [#B] Implement softwood merchantable volume equations
+**** TODO [#B] Implement sofarchivetwood merchantable volume equations
 ***** TODO [#B] Implement cv4 equations
+***** <2017-12-28 Thu> 
+      - This will need either really long function definitions, or the ability
+        to call other functions from the stored function string. The second
+        option seems do-able and would clean the csv's up quite a bit.
+        
+        The problem is that I need to access the original input region and spcd
+        to fully identify the equation in the first place... (i.e. to get the
+        correct coefficients).
+        
+        Got something working (on laptop forvol_dev/pupulate_with_funcs.R). It
+        looks like I am able to build equations within function strings pretty
+        easily. The next step is to figure out what is appropriate w/r/t notation
+        and keeping functions readable.
 **** TODO Create forvol-specific citations csv
+** Ideas
+*** Advanced usage methods
+**** Equation builder
+     - Allow user to retrieve equation strings (see equation forms idea below)
+     - Allow user to easily input their own coefficients
+*** Equation forms csv
+    - It is now clear that each ID from the FIA spreadsheets does not strictly correspond
+      to an equation form, that said it will eventually be necessary to create key value
+      pairs for equation forms and the functions themselves. This will be much simpler
+      and cleaner, but will require a lot of work to reorganize and name them (ideally
+      they will be named after the ciations)
+
 ** Archive 
-   
-** Changelog 
-*** <2017-12-25 Mon> 
-    - Added lookup_citation function (in R/helper.R). Still needs error catching
