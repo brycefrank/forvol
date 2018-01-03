@@ -5,7 +5,7 @@
 \title{Builds the default volume equation as defined by the US
 Forest Service configuration datasets.}
 \usage{
-build_equation(region, spcd)
+build_equation(region, spcd, vol_type)
 }
 \arguments{
 \item{region}{Region code}
@@ -15,7 +15,6 @@ build_equation(region, spcd)
 \value{
 An R function that computes CVTS for the input
 region and species code. If the code cannot be built,
-returns "EE"
 }
 \description{
 Builds the default volume equation as defined by the US

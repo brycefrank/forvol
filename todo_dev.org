@@ -23,8 +23,6 @@
      - It would be nice if [[https://github.com/brycefrank/forvol/wiki/Supported-Equations:-CVTS][this list]] was more of a table type thing
      - This would require editing bin/supported.R
 **** TODO [#B] Convert all csv's to rda
-**** DONE [#A] Improve Jupyter sample
-     CLOSED: [2017-12-27 Wed 19:49]
 **** TODO [#A] More tests!
 *** New Features
 **** TODO [#B] Implement sofarchivetwood merchantable volume equations
@@ -44,6 +42,10 @@
         and keeping functions readable.
 **** TODO Create forvol-specific citations csv
 ** Ideas
+*** Advanced usage methods
+**** Equation builder
+     - Allow user to retrieve equation strings (see equation forms idea below)
+     - Allow user to easily input their own coefficients
 *** Equation forms csv
     - It is now clear that each ID from the FIA spreadsheets does not strictly correspond
       to an equation form, that said it will eventually be necessary to create key value
