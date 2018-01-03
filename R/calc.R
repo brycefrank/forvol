@@ -45,5 +45,5 @@ calc_vol <- function(dbh, ht, spcd, region, vol_type) {
 
   # Order based off of original index
   new_tree$index <- as.numeric(row.names(new_tree))
-  return(new_tree[order(new_tree$index), ][vol_type])
+  return(new_tree[order(new_tree$index), ][vol_type][[1]])
 }
