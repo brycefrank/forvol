@@ -1,11 +1,20 @@
 ** Next Master Update Checklist
-*** TODO Implement some cv4, tarif, and sv632 equations (DF, WH, RC at least)
-**** TODO Test these (informally / formally)
-*** TODO Write test for generalized build_equations function
+*** DONE Implement some cv4, tarif, and sv632 equations (DF, WH, RC at least)
+    CLOSED: [2018-01-01 Mon 10:23]
+    - [X] DF
+    - [X] WH
+    - [X] RC
+*** DONE Write test for generalized build_equations function
+    CLOSED: [2018-01-03 Wed 09:25]
+*** DONE Write informal tests for merchantable volume, tarif, cv4, etc
+    CLOSED: [2018-01-03 Wed 09:25]
 *** TODO Re-do sample with new changes
-*** TODO Change calc_cvts to calc_vol OR refactor calc_cvts to work with build_eq
+*** TODO Update README with new changes
+*** DONE Change calc_cvts to calc_vol OR refactor calc_cvts to work with build_eq
+    CLOSED: [2018-01-01 Mon 10:48]
     
  - After these are done it will be ok to push to master
+*** TODO Create some test data using NVEL
 ** A Random To-Do List
 *** Maintenance & Improvements
 **** TODO [#C] Fix "AK_SECN" coefficient tables
@@ -18,7 +27,7 @@
      CLOSED: [2017-12-27 Wed 19:49]
 **** TODO [#A] More tests!
 *** New Features
-**** TODO [#B] Implement softwood merchantable volume equations
+**** TODO [#B] Implement sofarchivetwood merchantable volume equations
 ***** TODO [#B] Implement cv4 equations
 ***** <2017-12-28 Thu> 
       - This will need either really long function definitions, or the ability
@@ -34,4 +43,12 @@
         easily. The next step is to figure out what is appropriate w/r/t notation
         and keeping functions readable.
 **** TODO Create forvol-specific citations csv
+** Ideas
+*** Equation forms csv
+    - It is now clear that each ID from the FIA spreadsheets does not strictly correspond
+      to an equation form, that said it will eventually be necessary to create key value
+      pairs for equation forms and the functions themselves. This will be much simpler
+      and cleaner, but will require a lot of work to reorganize and name them (ideally
+      they will be named after the ciations)
+
 ** Archive 

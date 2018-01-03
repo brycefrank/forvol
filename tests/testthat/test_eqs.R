@@ -14,7 +14,7 @@ test_that("csv_path is a character", {
 # only one species / region combination
 test_that("build_equation returns a function for an arbitrary region
            and species", {
-  expect_equal(typeof(build_equation("OR_W", 202)), "closure")
+  expect_equal(typeof(build_equation("OR_W", 202, "cvts")), "closure")
 })
 
 test_that("get_equation_id returns a character for an arbitrary
@@ -34,4 +34,6 @@ test_that("Coefficients for an arbitrary region and species are retrieved", {
 #})
 
 ### TESTS FOR calc.R ###
-
+test_that("calc_vol calculates the correct volume for single arbitrary region and species",{
+  expect_equal(round(calc_vol(202, 12, 100, "OR_W", "sv632")$sv632), 2879)
+})
