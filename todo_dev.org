@@ -8,7 +8,8 @@
     CLOSED: [2018-01-03 Wed 09:25]
 *** DONE Write informal tests for merchantable volume, tarif, cv4, etc
     CLOSED: [2018-01-03 Wed 09:25]
-*** TODO Re-do sample with new changes
+*** DONE Re-do sample with new changes
+    CLOSED: [2018-01-03 Wed 11:04]
 *** TODO Update README with new changes
 *** DONE Change calc_cvts to calc_vol OR refactor calc_cvts to work with build_eq
     CLOSED: [2018-01-01 Mon 10:48]
