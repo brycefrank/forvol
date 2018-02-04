@@ -1,0 +1,40 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/bryce/Programming/forvol/todo_dev.org
+
+
+* DONE Implement some cv4, tarif, and sv632 equations (DF, WH, RC at least)
+  CLOSED: [2018-01-01 Mon 10:23]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-01-03 Wed 09:24
+  :ARCHIVE_FILE: ~/Programming/forvol/todo_dev.org
+  :ARCHIVE_OLPATH: Next Master Update Checklist
+  :ARCHIVE_CATEGORY: todo_dev
+  :ARCHIVE_TODO: DONE
+  :END:
+  - [X] DF
+  - [X] WH
+  - [X] RC
+
+* DONE Change calc_cvts to calc_vol OR refactor calc_cvts to work with build_eq
+  CLOSED: [2018-01-01 Mon 10:48]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-01-03 Wed 09:24
+  :ARCHIVE_FILE: ~/Programming/forvol/todo_dev.org
+  :ARCHIVE_OLPATH: Next Master Update Checklist
+  :ARCHIVE_CATEGORY: todo_dev
+  :ARCHIVE_TODO: DONE
+  :END:
+    
+- After these are done it will be ok to push to master
+
+* DONE [#A] Improve Jupyter sample
+  CLOSED: [2017-12-27 Wed 19:49]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-01-03 Wed 09:53
+  :ARCHIVE_FILE: ~/Programming/forvol/todo_dev.org
+  :ARCHIVE_OLPATH: A Random To-Do List/Maintenance & Improvements
+  :ARCHIVE_CATEGORY: todo_dev
+  :ARCHIVE_TODO: DONE
+  :END:

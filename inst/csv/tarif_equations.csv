@@ -1,0 +1,4 @@
+CF_VOL_EQ,EQ_STRING
+"CU202020","function(dbh,ht){ba <- B14 * dbh^2; cvts <- 10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)^2 + B4 * log10(dbh)+ B5 * log10(ht) + B6 * log10(ht)**2); tarif <- (cvts * B7) / ((1.033 * (1 + B9 * exp(B10 * (dbh / 10)))) * (ba + B12) + B13); return(tarif)}"
+"CU263004","function(dbh,ht){ba <- B12 * dbh^2; cvts <- 10^(B1 + B2 * log10(dbh) * log10(ht) + B3 * log10(dbh)^2 + B4 * dbh); tarif <- (cvts * B5) / ((B6 * (1 + B7 * exp(B8 * (dbh / 10)))) * (ba + B10) + B11); return(tarif)}"
+"CU000077","function(dbh,ht){ba <- B11 * dbh^2; cvts <- 10^(B1 + B2 * log10(dbh) + B3 * log10(ht)); tarif <- (cvts * B4) / ((B5 * (1 + B6 * exp(B7 * (dbh / 10)))) * (ba + B9) + B10); return(tarif)}"
